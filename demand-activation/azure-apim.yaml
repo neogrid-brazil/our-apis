@@ -3,7 +3,7 @@ apimServiceName: apim-testdevops-01
 
 apis:
   - name: demand-activation
-    openApiSpec: https://apimstorageng.blob.core.windows.net/files/demand-activation/api-spec.json?sv=2020-02-10&ss=b&srt=o&sp=rltfx&se=2021-05-28T01:03:17Z&st=2021-05-24T17:03:17Z&spr=https&sig=a5dkeKlY82sNh27026niJ5mlWBwtDhGVNzJGIlzF3PA%3D
+    openApiSpec: https://raw.githubusercontent.com/neogrid-brazil/our-apis/master/demand-activation/api-spec.json 
     suffix: demand-activation
     policy: ../common/policies/remove-headers.xml
     operations:

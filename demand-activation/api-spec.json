@@ -32,7 +32,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "../common/models/location.json#/Location"
+                                    "$ref": "https://raw.githubusercontent.com/neogrid-brazil/our-apis/master/common/models/location.json#/Location"
                                 }
                             }
                         }
