@@ -1,0 +1,13 @@
+{
+    "Location": {
+        "type": "object",
+        "properties": {
+            "locationId": {
+                "type": "integer"
+            },
+            "name": {
+                "type": "string"
+            }
+        }
+    }
+}

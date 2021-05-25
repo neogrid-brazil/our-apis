@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ApimServiceName": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "properties": {
+        "isCurrent": false,
+        "subscriptionRequired": false,
+        "displayName": "demand-activation",
+        "path": "demand-activation",
+        "protocols": [
+          "https"
+        ],
+        "value": "https://apimstorageng.blob.core.windows.net/files/demand-activation/api-spec.json?sv=2020-02-10&ss=b&srt=o&sp=rltfx&se=2021-05-28T01:03:17Z&st=2021-05-24T17:03:17Z&spr=https&sig=a5dkeKlY82sNh27026niJ5mlWBwtDhGVNzJGIlzF3PA%3D",
+        "format": "openapi-link"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/demand-activation')]",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "apiVersion": "2019-01-01",
+      "dependsOn": []
+    },
+    {
+      "properties": {
+        "value": "<policies>\r\n    <inbound>\r\n        <base />\r\n    </inbound>\r\n    <backend>\r\n        <base />\r\n    </backend>\r\n    <outbound>\r\n        <set-header name=\"X-Powered-By\" exists-action=\"delete\" />\r\n        <set-header name=\"X-AspNet-Version\" exists-action=\"delete\" />\r\n        <base />\r\n    </outbound>\r\n    <on-error>\r\n        <base />\r\n    </on-error>\r\n</policies>",
+        "format": "rawxml"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/demand-activation/policy')]",
+      "type": "Microsoft.ApiManagement/service/apis/policies",
+      "apiVersion": "2019-01-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'demand-activation')]"
+      ]
+    },
+    {
+      "properties": {
+        "value": "<policies>\r\n    <inbound>\r\n        <rate-limit-by-key calls=\"3\" renewal-period=\"15\" counter-key=\"@(context.Subscription.Id)\" />\r\n        <base />\r\n    </inbound>\r\n    <backend>\r\n        <base />\r\n    </backend>\r\n    <outbound>\r\n        <base />\r\n    </outbound>\r\n    <on-error>\r\n        <base />\r\n    </on-error>\r\n</policies>",
+        "format": "rawxml"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/demand-activation/getProducts/policy')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "apiVersion": "2019-01-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'demand-activation')]"
+      ]
+    },
+    {
+      "properties": {
+        "value": "<policies>\r\n    <inbound>\r\n        <rate-limit-by-key calls=\"20\" renewal-period=\"15\" counter-key=\"@(context.Subscription.Id)\" />\r\n        <base />\r\n    </inbound>\r\n    <backend>\r\n        <base />\r\n    </backend>\r\n    <outbound>\r\n        <base />\r\n    </outbound>\r\n    <on-error>\r\n        <base />\r\n    </on-error>\r\n</policies>",
+        "format": "rawxml"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/demand-activation/getLocations/policy')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "apiVersion": "2019-01-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'demand-activation')]"
+      ]
+    }
+  ]
+}

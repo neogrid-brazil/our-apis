@@ -1,0 +1,77 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "contact": {
+            "email": "apis@neogrid.com",
+            "name": "API Team",
+            "url": "https://api.neogrid.com/contact"
+        },
+        "description": "Neogrid Demand Activation API",
+        "license": {
+            "name": "MIT",
+            "url": "https://api.neogrid.com/license"
+        },
+        "termsOfService": "This is our SLA",
+        "title": "Sample API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.neogrid.com/",
+            "description": "Production API"
+        }
+    ],
+    "paths": {
+        "/locations": {
+            "get": {
+                "description": "Return all locations.",
+                "operationId": "getLocations",
+                "responses": {
+                    "200": {
+                        "description": "List",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "../common/models/location.json#/Location"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "description": "Return all products.",
+                "operationId": "getProducts",
+                "responses": {
+                    "200": {
+                        "description": "List",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Product": {
+                "type": "object",
+                "properties": {
+                    "productId": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
